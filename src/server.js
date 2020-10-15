@@ -1,23 +1,20 @@
-//importar dependencial
+const express = require('express');
+const path = require('path');
 
-const express=require('express');
-const path=require('path');
-const pages=require('./pages.js');
+const pages = require('./pages.js');
 
-//inciando o express
-const server =express()
+const server = express()
+
 server
 .use(express.static('public'))
-
 .set('views', path.join(__dirname, 'views'))
 .set('view engine', 'hbs')
 
-//criar  rotas
-.get('/', pages.index)
-.get('/orphanage', pages.orphanage)
-.get('/orphanages', pages.orphanages)
-.get('/create-orphanage', pages.createOrphanage)
+server.get('/', pages.index)
+server.get('/orphanage', pages.orphanage)
+server.get('/orphanages', pages.orphanages)
+server.get('/create-orphanage', pages.createOrphanage)
 
-
-//ligar o servidor
-server.listen(5500)
+server.listen(5500, () => {
+    console.log ('Server started')
+})
